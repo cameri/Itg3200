@@ -89,6 +89,46 @@ void ITG3200::standBy(byte axis) {
   write(GYRO_REG_PWR_MGM, t & ~axis);
 }
 
+byte ITG3200::getAddress()
+{
+  return read(GYRO_REG_WHOAMI);
+}
+
+void ITG3200::setAddress(byte newAddress)
+{
+  write(GYRO_REG_WHOAMI, newAddress);
+}
+
+void ITG3200::setInterruptConfig(byte config)
+{
+  // bit 3 and 1 must be zero
+  write(GYRO_REG_INT_CFG, 0xF5 & config);
+}
+
+bool ITG3200::isInterruptRawDataReady()
+{
+  byte result = read(GYRO_REG_INT_STS);
+  return (result & GYRO_INT_DATA) == GYRO_INT_DATA;
+}
+
+bool ITG3200::isInterruptReady()
+{
+  byte result = read(GYRO_REG_INT_STS);
+  return (result & GYRO_INT_READY) == GYRO_INT_READY;
+}
+
+byte ITG3200::getInterruptConfig()
+{
+  return read(GYRO_REG_INT_CFG);
+}
+
+void ITG3200::setClockSource(byte clockSource)
+{
+  if (clockSource >= 6) // 6 and 7 are reserved
+    return;
+  write(GYRO_REG_PWR_MGM, 0xF8 & clockSource);
+}
+
 void ITG3200::write(byte reg, byte val) {
   Wire.beginTransmission(_gyro_address);
   Wire.send(reg);

@@ -65,9 +65,8 @@ class ITG3200
     static const byte GYRO_INT_PULSE=0x00; // INT Latch mode = 50us pulse
     static const byte GYRO_INT_CLRRD=0x10; // INT clear method = any register ready
     static const byte GYRO_INT_STSRD=0x00; // INT clear method = status reg. read
-    static const byte GYRO_INT_READY=0x04; // Enable interrupt when device is ready
-    static const byte GYRO_INT_DATA=0x01; // Enable interrupt when data is available
-
+    static const byte GYRO_INT_RDYEN=0x04; // INT Ready Enable
+    static const byte GYRO_INT_RAWEN=0x01; // INT Raw Data Ready Enable 
     
     ITG3200();
     void begin(int gyro_address);
@@ -76,18 +75,26 @@ class ITG3200
     void sleep();
     void standBy(byte axis);
     void wake();
-    void enableInterrupt();
-    void disableInterrupt();
+    void setInterruptConfig(byte config);
+    byte getInterruptConfig();
+    bool isInterruptRawDataReady();
+    bool isInterruptReady();
     float getX();
     float getY();
     float getZ();
     float getTemperature();
+    byte getAddress();
+    void setAddress(byte newAddress);
+    void setClockSource(byte clockSource);
     
+
   private:
-    static const byte GYRO_REG_PWR_MGM=0x3E;
+    static const byte GYRO_REG_WHOAMI=0x00;
     static const byte GYRO_REG_SMPLRT_DIV=0x15;
     static const byte GYRO_REG_DLPF_FS=0x16;
     static const byte GYRO_REG_INT_CFG=0x17;
+    static const byte GYRO_REG_INT_STS=0X1A;
+
     static const byte GYRO_REG_TEMP_H=0x1B;
     static const byte GYRO_REG_TEMP_L=0x1C;
     static const byte GYRO_REG_X_H=0x1D;
@@ -96,6 +103,10 @@ class ITG3200
     static const byte GYRO_REG_Y_L=0x20;
     static const byte GYRO_REG_Z_H=0x21;
     static const byte GYRO_REG_Z_L=0x22;
+    static const byte GYRO_REG_PWR_MGM=0x3E;
+
+    static const byte GYRO_INT_READY=0x04; // Enable interrupt when device is ready
+    static const byte GYRO_INT_DATA=0x01; // Enable interrupt when data is available
     
     static const float GYRO_TEMP_SENSITIVITY = 280.0;
     static const int GYRO_TEMP_OFFSET = 13200;
