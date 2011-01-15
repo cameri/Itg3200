@@ -1,4 +1,6 @@
 [ ] [Date      ] [Description                                                  ]
+ *   2011-01-15   Added copyright to example files. Renamed "license.txt" to
+                  "LICENSE".
  +   2011-01-15   Added interrupt example and added two missing constants.
  +   2011-01-15   Added getAddress() and setAddress() to change the I2C ID of
                   the device.
