@@ -1,0 +1,9 @@
+[ ] [Date      ] [Description                                                  ]
+ +   2010-11-15   First commit. Added most constants and support for basic
+                  functionality.
+ +   2011-01-15   Added getAddress() and setAddress() to change the I2C ID of
+                  the device.
+                  Added setInterruptConfig(),getInterruptConfig(),
+                  isInterruptReady(), isInterruptRawDataReady() and
+                  setClockSource();
+                   
