@@ -1,2 +1,33 @@
 Invensense ITG-3200 Gyroscope Library for Arduino
 Developed by Ricardo Arturo Cabral (ing dot cabral dot mejia at gmail dot com)
+
+Features:
+-Use of built-in interrupt functionality [OPTIONAL]
+-Read all gyrscope sensor data (X, Y and Z rotational axes)
+-Read built-in temperature sensor data
+-Functionality to change clock source
+-Use of built-in sleep functions (whole device or individual axes)
+
+Function list:
+-Initialization
+  -begin(address)
+  -reset()
+-Power Management
+  -sleep()
+  -wake()
+  -standBy(axis)
+  -setClockSource()
+-Sensor Data
+  -getX()
+  -getY()
+  -getZ()
+  -getTemperature()
+-Interrupt Functionality
+  -setInterruptConfig(config)
+  -getInterruptConfig()
+  -isInterruptRawDataReady()
+  -isInterruptReady()
+-Miscellaneous
+  -getAddress()
+  -setAddress()
+
